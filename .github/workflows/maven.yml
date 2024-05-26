@@ -39,10 +39,6 @@ jobs:
       if: failure()
       run: mvn surefire-report:report-only
 
-    - name: Install xmllint
-      if: failure()
-      run: sudo apt-get install -y libxml2-utils
-
     - name: Notify Telegram on success
       if: success()
       env:
@@ -57,8 +53,8 @@ jobs:
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: |
-        FAILED_TESTS=$(xmllint --xpath '//testcase[failure]/@classname' target/surefire-reports/*.xml | sed 's/classname="\([^"]*\)"/\1/g')
-        TEST_NAMES=$(xmllint --xpath '//testcase[failure]/@name' target/surefire-reports/*.xml | sed 's/name="\([^"]*\)"/\1/g')
+        FAILED_TESTS=$(grep -oP '(?<=<testcase ).*?classname="\K[^"]+' target/surefire-reports/*.xml)
+        TEST_NAMES=$(grep -oP '(?<=<testcase ).*?name="\K[^"]+' target/surefire-reports/*.xml)
         if [ -z "$FAILED_TESTS" ]; then
           FAILED_TESTS="Не удалось получить информацию о проваленных тестах."
         else
