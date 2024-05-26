@@ -23,7 +23,7 @@
 ## Время работы в зависимости от количества данных в файле 
 Тесты реагируют на изменение количество чисел в input.txt. Покажем это на графике. Будем изменять количество чисел от 5 до 10000. Видно, что график растет нелинейно. 
 
-![Image alt](https://github.com/{maxim-safonov}/{maven}/raw/{main}/{path}/image.png)
+![Image alt](https://github.com/{maxim-safonov}/{maven}/raw/{main}/{(https://github.com/maxim-safonov/maven/blob/main/2024-05-26%2021.37.00.jpg)}/image.png)
 
 ## Описание CI системы. Работа с Github Actions в репозитории
 
