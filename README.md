@@ -26,6 +26,7 @@
 ![Image alt](https://github.com/maxim-safonov/maven/blob/main/2024-05-26%2021.37.00.jpg)
 
 ## Описание CI системы. Работа с Github Actions в репозитории
+При любом коммите тесты запускаются автоматически в GitHub Actions, которые проверят корректность работы программы. Также их можно запустить вручную через Actions - Java CI, в строке ""
 
 ## Telegram бот
 
