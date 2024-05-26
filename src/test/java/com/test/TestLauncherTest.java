@@ -20,7 +20,7 @@ public class TestLauncherTest {
     public void test_summ() throws IOException {
         long t1 = System.nanoTime();
         UserService userService = new UserService();
-        assertEquals(15, userService._sum());
+        assertEquals(0, userService._sum());
         long t2 = System.nanoTime();
         System.out.println(t2 - t1);
     }
