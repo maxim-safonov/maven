@@ -23,17 +23,20 @@ public class UserService {
         }
     }
 
-    public long _min() {
+    public long[] _min() { // указал производительность на ИСХОДНЫХ методах
+        long t1 = System.nanoTime();
         long min = users.get(0);
         for (long iterator : users) {
             if (iterator < min) {
                 min = iterator;
             }
         }
-        return min;
+        long t2 = System.nanoTime();
+        return new long[]{min, t2 - t1};
     }
 
-    public long _max() {
+    public long[] _max() {
+        long t1 = System.nanoTime();
         long max = users.get(0);
         for (long iterator : users) {
             if (iterator > max) {
@@ -41,33 +44,42 @@ public class UserService {
             }
 
         }
-        return max;
+        long t2 = System.nanoTime();
+        return new long[]{max, t2 - t1};
     }
 
-    public long _sum() {
+    public long[] _sum() {
+        long t1 = System.nanoTime();
         long summa = 0;
         for (int i = 0; i < users.size(); i++) {
             summa += users.get(i);
+            if (summa > Long.MAX_VALUE || summa < Long.MIN_VALUE) { //дописал exception на выход за границу
+                throw new ArithmeticException();
+            }
         }
-        return summa;
+        long t2 = System.nanoTime();
+        return new long[]{summa, t2 - t1};
     }
 
-    public long _mult() {
+    public long[] _mult() {
+        long t1 = System.nanoTime();
         long mult = 1;
         for (int i = 0; i < users.size(); i++) {
             mult *= users.get(i);
+            if (mult > Long.MAX_VALUE || mult < Long.MIN_VALUE) { //дописал exception на выход за границу
+                throw new ArithmeticException();
+            }
         }
-        return mult;
-    }
-    public double _sr() {
-        return (double) this._sum() /users.size();
+        long t2 = System.nanoTime();
+        return new long[]{mult, t2 - t1};
     }
 
-
-
-//    public boolean add(String user) {
-//        return users.add(user);
-//    }
+    public double[] _sr() {
+        long t1 = System.nanoTime();
+        double sr = (double) this._sum()[0] / users.size(); // деление на 0 проверять не нужно, так как по условию чисел в файле минимум 1
+        long t2 = System.nanoTime();
+        return new double[]{sr, t2 - t1};
+    }
 
 
 }
